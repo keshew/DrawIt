@@ -13,5 +13,4 @@ class GameViewModel: ObservableObject {
         scene.game  = gameData
         return scene
     }
-
 }
