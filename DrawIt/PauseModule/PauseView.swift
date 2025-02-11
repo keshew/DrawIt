@@ -2,7 +2,7 @@ import SwiftUI
 
 struct PauseView: View {
     @StateObject var pauseModel =  PauseViewModel()
-
+    var gameData: GameData
     var body: some View {
         ZStack {
             Image(ImageName.menuBackground.rawValue)
@@ -24,15 +24,16 @@ struct PauseView: View {
                     .outlineText(color: .black, width: 0.5)
                     
                 VStack(spacing: 15) {
-                    CircleButton(foregroundImage: ImageName.playButton.rawValue,
+                    ResumeButton(foregroundImage: ImageName.playButton.rawValue,
                                  text: "reusme",
-                                 action: pauseModel.resume,
                                  sizeBack: 121,
                                  sizeForward: 54,
                                  offsetXtForImage: 5,
                                  offsetXtForText: 40,
                                  sizeForText: 28,
-                                 widthForOutline: 0.8)
+                                 widthForOutline: 0.8) {
+                        gameData.isPause = false
+                    }
                     
                     
                     HStack(spacing: 40) {
@@ -55,12 +56,17 @@ struct PauseView: View {
             .navigationDestination(isPresented: $pauseModel.isMenuAvailible) {
                 MenuView()
             }
+            
+            .navigationDestination(isPresented: $pauseModel.isGameAvailible) {
+                GameView()
+            }
         }
         .navigationBarBackButtonHidden(true)
     }
 }
 
 #Preview {
-    PauseView()
+    let gameData = GameData()
+    return PauseView(gameData: gameData)
 }
 

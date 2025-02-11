@@ -3,6 +3,7 @@ import SwiftUI
 class PauseViewModel: ObservableObject {
     let contact = PauseModel()
     @Published var isMenuAvailible = false
+    @Published var isGameAvailible = false
     @Published var audioManager = AudioManager()
 
     func goToMenu() {
@@ -12,6 +13,7 @@ class PauseViewModel: ObservableObject {
     
     func goToRestart() {
         audioManager.playClickSound()
+        isGameAvailible = true
     }
     
     func resume() {

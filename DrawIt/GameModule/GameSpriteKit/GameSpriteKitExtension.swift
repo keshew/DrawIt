@@ -191,10 +191,12 @@ extension GameSpriteKit {
         
         let restartBackButton = SKSpriteNode(imageNamed: ImageName.circleButtonImage.rawValue)
         restartBackButton.size = CGSize(width: size.width / 6.5, height: size.height / 14)
+        restartBackButton.name = "restartBackButton"
         restartBackButton.position = CGPoint(x: size.width / 1.15, y: size.height / 1.12)
         addChild(restartBackButton)
         
         let restartButton = SKSpriteNode(imageNamed: ImageName.restart.rawValue)
+        restartButton.name = "restartButton"
         restartButton.size = CGSize(width: size.width / 12.5, height: size.height / 25)
         restartButton.position = CGPoint(x: size.width / 1.15, y: size.height / 1.12)
         addChild(restartButton)
@@ -256,6 +258,12 @@ extension GameSpriteKit {
         timeLabel.position = CGPoint(x: size.width / 1.9, y: size.height / 7.7)
         timeLabel.fontColor = .black
         addChild(timeLabel)
+    }
+    
+    func resetScene() {
+        removeAllChildren()
+        game!.timeLeft = 179
+        setupView()
     }
     
     override func didMove(to view: SKView) {

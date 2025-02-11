@@ -63,6 +63,9 @@ struct LoseView: View {
             .navigationDestination(isPresented: $loseModel.isShopAvailible) {
                 ShopView()
             }
+            
+            NavigationLink(destination: GameView(), isActive: $loseModel.isRestartAvailible) {}
+                .hidden()
         }
         .navigationBarBackButtonHidden(true)
     }

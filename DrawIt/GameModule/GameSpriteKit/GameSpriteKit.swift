@@ -53,6 +53,10 @@ class GameSpriteKit: SKScene, SKPhysicsContactDelegate {
         if let tappedNode = self.atPoint(location) as? SKSpriteNode, tappedNode.name == "pauseBack" || tappedNode.name == "pause" {
             game?.isPause = true
         }
+        
+        if let tappedNode = self.atPoint(location) as? SKSpriteNode, tappedNode.name == "restartButton" || tappedNode.name == "restartBackButton"{
+            resetScene()
+        }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -92,6 +96,11 @@ class GameSpriteKit: SKScene, SKPhysicsContactDelegate {
                 audioManager.stopDrawSounds()
             }
         }
+    }
+    
+    deinit {
+        removeAllChildren()
+        removeAllActions()
     }
     
     func didBegin(_ contact: SKPhysicsContact) {

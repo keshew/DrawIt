@@ -6,21 +6,23 @@ struct GameView: View {
     @StateObject private var gameData = GameData()
     
     var body: some View {
-        SpriteView(scene: gameModel.createGameScene(gameData: gameData))
-            .ignoresSafeArea()
-            .navigationBarBackButtonHidden(true)
-        
-            .navigationDestination(isPresented: $gameData.isLose) {
-                LoseView()
+        ZStack {
+            SpriteView(scene: gameModel.createGameScene(gameData: gameData))
+                .ignoresSafeArea()
+                .navigationBarBackButtonHidden(true)
+            
+                .navigationDestination(isPresented: $gameData.isLose) {
+                    LoseView()
+                }
+            
+                .navigationDestination(isPresented: $gameData.isWin) {
+                    WinView()
+                }
+            
+            if gameData.isPause {
+                PauseView(gameData: gameData)
             }
-        
-            .navigationDestination(isPresented: $gameData.isPause) {
-                PauseView()
-            }
-        
-            .navigationDestination(isPresented: $gameData.isWin) {
-                WinView()
-            }
+        }
     }
 }
 

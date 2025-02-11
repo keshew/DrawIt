@@ -81,6 +81,40 @@ struct CircleButton: View {
     }
 }
 
+struct ResumeButton: View {
+    var foregroundImage: String
+    var text: String = ""
+    var sizeBack: CGFloat
+    var sizeForward: CGFloat
+    var offsetXtForImage: CGFloat = 0
+    var offsetYtForImage: CGFloat = 0
+    var offsetXtForText: CGFloat = 25
+    var sizeForText: CGFloat = 18
+    var widthForOutline: CGFloat = 0.6
+    var action: (() -> ())
+    var body: some View {
+        Button(action: {
+            action()
+        }) {
+            ZStack {
+                Image(ImageName.circleButtonImage.rawValue)
+                    .resizable()
+                    .frame(width: sizeBack, height: sizeBack)
+                
+                Image(foregroundImage)
+                    .resizable()
+                    .frame(width: sizeForward, height: sizeForward)
+                    .offset(x: offsetXtForImage, y: offsetYtForImage)
+                
+                Text(text)
+                    .Secular(size: sizeForText, color: .red)
+                    .outlineText(width: widthForOutline)
+                    .offset(y: offsetXtForText)
+            }
+        }
+    }
+}
+
 struct MoneyView: View {
     var text: String = ""
     var body: some View {
